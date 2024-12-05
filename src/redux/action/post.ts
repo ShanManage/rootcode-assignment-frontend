@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { CreatePostPayload } from "../../interface";
+import { CreatePostCommentPayload, CreatePostPayload } from "../../interface";
 import { postService } from "../../service/post";
 
 export const createPost = createAsyncThunk(
@@ -42,8 +42,22 @@ export const getPost = createAsyncThunk(
   }
 )
 
+export const createPostComment = createAsyncThunk(
+  'post/create-post-comment',
+  async (payload: CreatePostCommentPayload) => {
+    try {
+      const createPostCommentResponse = await postService.createPostComment(payload)
+
+      return createPostCommentResponse
+    } catch (error: any) {
+      throw new Error(error.message);
+    }
+  }
+)
+
 export const postAction = {
   createPost,
   getAllPosts,
-  getPost
+  getPost,
+  createPostComment
 }

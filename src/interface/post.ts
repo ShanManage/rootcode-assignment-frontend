@@ -42,3 +42,16 @@ export interface Post {
   titleColor: TitleColor
   comments: PostComment[]
 }
+
+export interface CreatePostCommentPayload {
+  content: string
+  postId: number
+}
+
+export interface CreatePostCommentResponse {
+  message: string
+}
+
+export interface CreatePostCommentFormField {
+  content: string
+}

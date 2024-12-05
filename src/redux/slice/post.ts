@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { APP_STATUS, Post, PostState } from "../../interface";
-import { createPost, getAllPosts, getPost } from "../action";
+import { createPost, createPostComment, getAllPosts, getPost } from "../action";
 
 const initialState: PostState = {
   isLoading: false,
@@ -55,6 +55,18 @@ const postSlice = createSlice({
     .addCase(getPost.rejected, (state) => {
       state.viewPost = initialState.viewPost
       state.isLoading = false
+    })
+    .addCase(createPostComment.pending, (state) => {
+      state.isLoading = true
+      state.status = APP_STATUS.INITIAL
+    })
+    .addCase(createPostComment.fulfilled, (state) => {
+      state.isLoading = false
+      state.status = APP_STATUS.SUCCESS
+    })
+    .addCase(createPostComment.rejected, (state) => {
+      state.isLoading = false
+      state.status = APP_STATUS.ERROR
     })
   }
 })

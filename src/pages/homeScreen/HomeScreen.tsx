@@ -48,8 +48,8 @@ const HomeScreen = () => {
   }
 
   const onOpenViewModal = (id: number) => {
-    dispatch(postAction.getPost(id))
     setIsOpenViewModal(true)
+    dispatch(postAction.getPost(id))
   }
   return (
     <div className="container">
