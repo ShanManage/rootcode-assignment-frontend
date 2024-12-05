@@ -1,5 +1,5 @@
 import { AxiosResponse } from "axios";
-import { CreatePostPayload, CreatePostResponse, Post } from "../interface";
+import { CreatePostCommentPayload, CreatePostCommentResponse, CreatePostPayload, CreatePostResponse, Post } from "../interface";
 import { axiosPrivateInstance } from ".";
 
 const createPost = async (
@@ -22,7 +22,29 @@ const getAllPosts = async (): Promise<AxiosResponse<Post[]>> => {
   }
 };
 
+const getPost = async (id: number): Promise<AxiosResponse<Post>> => {
+  try {
+    const res: AxiosResponse<Post> = await axiosPrivateInstance.get(`/post/${id}`);
+    return res;
+  } catch (error) {
+    throw new Error(error as string);
+  }
+};
+
+const createPostComment = async (
+  payload: CreatePostCommentPayload,
+): Promise<AxiosResponse<CreatePostCommentResponse>> => {
+  try {
+    const res: AxiosResponse<CreatePostCommentResponse> = await axiosPrivateInstance.post('/comments', payload);
+    return res;
+  } catch (error) {
+    throw new Error(error as string);
+  }
+};
+
 export const postService = {
   createPost,
-  getAllPosts
+  getAllPosts,
+  getPost,
+  createPostComment
 }
