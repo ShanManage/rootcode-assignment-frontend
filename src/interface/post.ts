@@ -27,6 +27,12 @@ export interface PostState {
   status: APP_STATUS
   message: string
   allPosts: Post[]
+  viewPost: Post
+}
+
+export interface PostComment {
+  id: number
+  content: string
 }
 
 export interface Post {
@@ -34,4 +40,18 @@ export interface Post {
   title: string
   description: string
   titleColor: TitleColor
+  comments: PostComment[]
+}
+
+export interface CreatePostCommentPayload {
+  content: string
+  postId: number
+}
+
+export interface CreatePostCommentResponse {
+  message: string
+}
+
+export interface CreatePostCommentFormField {
+  content: string
 }
