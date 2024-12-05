@@ -2,6 +2,8 @@ import { Divider, Form, Modal, Space } from "antd"
 import { CreatePostFormFields } from "../../../interface"
 import TextArea from "antd/es/input/TextArea"
 import { CustomInput, CustomButton } from "../../atom"
+import { useSelector } from "react-redux"
+import { RootState } from "../../../redux/store"
 
 export interface CreatePostModalProps {
   isOpen: boolean
@@ -13,6 +15,7 @@ const CreatePostModal = ({
   onClose,
   onFinish
 }: CreatePostModalProps) => {
+  const isLoading = useSelector((state: RootState) => state.post.isLoading)
   return (
     <Modal
       title="CREATE POST"
@@ -31,7 +34,7 @@ const CreatePostModal = ({
           >
             <CustomInput
               size='large'
-              placeholder='Email Address'
+              placeholder='Post Title'
             />
           </Form.Item>
           <Form.Item<CreatePostFormFields>
@@ -51,7 +54,7 @@ const CreatePostModal = ({
               size='large'
               htmlType="submit"
               className='full-width'
-              // loading={isLoading}
+              loading={isLoading}
             >
               CREATE POST
             </CustomButton>
