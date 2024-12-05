@@ -22,7 +22,17 @@ const getAllPosts = async (): Promise<AxiosResponse<Post[]>> => {
   }
 };
 
+const getPost = async (id: number): Promise<AxiosResponse<Post>> => {
+  try {
+    const res: AxiosResponse<Post> = await axiosPrivateInstance.get(`/post/${id}`);
+    return res;
+  } catch (error) {
+    throw new Error(error as string);
+  }
+};
+
 export const postService = {
   createPost,
-  getAllPosts
+  getAllPosts,
+  getPost
 }

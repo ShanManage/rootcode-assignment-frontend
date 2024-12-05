@@ -27,6 +27,7 @@ export interface PostState {
   status: APP_STATUS
   message: string
   allPosts: Post[]
+  viewPost: Post
 }
 
 export interface PostComment {

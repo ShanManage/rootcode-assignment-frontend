@@ -29,7 +29,21 @@ export const getAllPosts = createAsyncThunk(
   }
 )
 
+export const getPost = createAsyncThunk(
+  'post/get-one-by-id',
+  async (id: number) => {
+    try {
+      const postResponse = await postService.getPost(id)
+      
+      return postResponse;
+    } catch (error: any) {
+      throw new Error(error.message);
+    }
+  }
+)
+
 export const postAction = {
   createPost,
-  getAllPosts
+  getAllPosts,
+  getPost
 }

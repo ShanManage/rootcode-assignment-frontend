@@ -1,19 +1,26 @@
 import { Card, Divider, Flex, Typography } from "antd"
 import { Post, TitleColor } from "../../../interface"
 
+export type PostCardProps = Post & {
+  isDisable: boolean
+  onClick?: () => void
+}
+
 const PostCard = ({
   title,
   description,
   comments,
-  titleColor
-}: Post) => {
+  titleColor,
+  isDisable,
+  onClick
+}: PostCardProps) => {
   const colorMap: Record<TitleColor, string> = {
     BLUE: 'blue',
     YELLOW: 'yellow',
     RED: 'red',
   };
   return (
-    <Card hoverable className="full-width">
+    <Card hoverable className="full-width" onClick={!isDisable ? onClick : undefined }>
       <Flex justify="center">
         <Typography.Title level={4} style={{ color: colorMap[titleColor] }} ellipsis className="zero-margin">
           {title}
@@ -27,7 +34,6 @@ const PostCard = ({
           {comments.length} comments
         </Typography.Title>
       </Flex>
-
     </Card>
   )
 }

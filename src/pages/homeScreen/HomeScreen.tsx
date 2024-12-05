@@ -8,10 +8,12 @@ import { postAction } from "../../redux/action";
 import { Card, Flex } from "antd";
 import { resetStatus } from "../../redux/slice/post";
 import styles from './HomeScreen.module.scss'
+import ViewPostModal from "../../components/post-management/viewPostModal/ViewPostModal";
 
 const HomeScreen = () => {
   const dispatch = useDispatch<AppDispatch>()
   const [isOpenCreateModal, setIsOpenCreateModal] = useState(false)
+  const [isOpenViewModal, setIsOpenViewModal] = useState(false)
 
   const isLoading = useSelector((state: RootState) => state.post.isLoading)
   const createPostStatus = useSelector((state: RootState) => state.post.status)
@@ -40,6 +42,15 @@ const HomeScreen = () => {
   const onCloseCreateModal = () => {
     setIsOpenCreateModal(false)
   }
+
+  const onCloseViewModal = () => {
+    setIsOpenViewModal(false)
+  }
+
+  const onOpenViewModal = (id: number) => {
+    dispatch(postAction.getPost(id))
+    setIsOpenViewModal(true)
+  }
   return (
     <div className="container">
       <Card bordered={false} className={styles.createBtnCard}>
@@ -52,13 +63,17 @@ const HomeScreen = () => {
       </Card>
       <Flex vertical gap={10}>
         {allPosts.map((post) => (
-          <PostCard {...post} key={post.id} />
+          <PostCard isDisable={false} onClick={() => onOpenViewModal(post.id)} {...post} key={post.id} />
         ))}
       </Flex>
       <CreatePostModal
         isOpen={isOpenCreateModal}
         onFinish={onFinish}
         onClose={onCloseCreateModal}
+      />
+      <ViewPostModal
+        isOpen={isOpenViewModal}
+        onClose={onCloseViewModal}
       />
     </div>
   )
