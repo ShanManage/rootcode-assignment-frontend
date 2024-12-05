@@ -29,9 +29,15 @@ export interface PostState {
   allPosts: Post[]
 }
 
+export interface PostComment {
+  id: number
+  content: string
+}
+
 export interface Post {
   id: number
   title: string
   description: string
   titleColor: TitleColor
+  comments: PostComment[]
 }
