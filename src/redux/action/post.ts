@@ -16,6 +16,20 @@ export const createPost = createAsyncThunk(
   }
 )
 
+export const getAllPosts = createAsyncThunk(
+  'post/get-all',
+  async () => {
+    try {
+      const allPostsResponse = await postService.getAllPosts()
+      
+      return allPostsResponse;
+    } catch (error: any) {
+      throw new Error(error.message);
+    }
+  }
+)
+
 export const postAction = {
-  createPost
+  createPost,
+  getAllPosts
 }

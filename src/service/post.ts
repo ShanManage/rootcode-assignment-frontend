@@ -1,5 +1,5 @@
 import { AxiosResponse } from "axios";
-import { CreatePostPayload, CreatePostResponse } from "../interface";
+import { CreatePostPayload, CreatePostResponse, Post } from "../interface";
 import { axiosPrivateInstance } from ".";
 
 const createPost = async (
@@ -13,6 +13,16 @@ const createPost = async (
   }
 };
 
+const getAllPosts = async (): Promise<AxiosResponse<Post[]>> => {
+  try {
+    const res: AxiosResponse<Post[]> = await axiosPrivateInstance.get('/post');
+    return res;
+  } catch (error) {
+    throw new Error(error as string);
+  }
+};
+
 export const postService = {
-  createPost
+  createPost,
+  getAllPosts
 }

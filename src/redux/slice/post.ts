@@ -1,17 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { APP_STATUS, PostState } from "../../interface";
-import { createPost } from "../action";
+import { createPost, getAllPosts } from "../action";
 
 const initialState: PostState = {
   isLoading: false,
   message: '',
-  status: APP_STATUS.INITIAL
+  status: APP_STATUS.INITIAL,
+  allPosts: []
 }
 
 const postSlice = createSlice({
   name: 'post',
   initialState,
-  reducers: {},
+  reducers: {
+    resetStatus: (state) => {
+      state.status = APP_STATUS.INITIAL
+    }
+  },
   extraReducers: (builder) => {
     builder
     .addCase(createPost.pending, (state) => {
@@ -26,7 +31,23 @@ const postSlice = createSlice({
       state.isLoading = false
       state.status = APP_STATUS.ERROR
     })
+    .addCase(getAllPosts.pending, (state) => {
+      state.allPosts = []
+      state.isLoading = true
+    })
+    .addCase(getAllPosts.fulfilled, (state, action) => {
+      state.allPosts = action.payload.data
+      state.isLoading = false
+    })
+    .addCase(getAllPosts.rejected, (state) => {
+      state.allPosts = []
+      state.isLoading = false
+    })
   }
 })
+
+export const {
+  resetStatus
+} = postSlice.actions
 
 export default postSlice.reducer

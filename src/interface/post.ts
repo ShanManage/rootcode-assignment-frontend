@@ -26,4 +26,12 @@ export interface PostState {
   isLoading: boolean
   status: APP_STATUS
   message: string
+  allPosts: Post[]
+}
+
+export interface Post {
+  id: number
+  title: string
+  description: string
+  titleColor: TitleColor
 }
