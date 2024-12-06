@@ -1,4 +1,4 @@
-# SIMPLEBOOKS-ASSIGNMENT-FRONTEND
+# ROOTCODE-ASSIGNMENT-FRONTEND
 This repository contains the source code relates to simplebooks take home assignment (Front-End). 
 
 This is a [React.js](https://react.dev/) project bootstrapped with [`create vite`](https://vitejs.dev/guide/).
